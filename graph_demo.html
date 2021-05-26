@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 500px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "Amazon", "label": "Amazon", "shape": "dot", "size": 10}, {"id": "Microsoft", "label": "Microsoft", "shape": "dot", "size": 10}, {"id": "Google", "label": "Google", "shape": "dot", "size": 10}, {"id": "Apple", "label": "Apple", "shape": "dot", "size": 10}, {"id": "Facebook", "label": "Facebook", "shape": "dot", "size": 10}, {"id": "Cisco", "label": "Cisco", "shape": "dot", "size": 10}, {"id": "Intel", "label": "Intel", "shape": "dot", "size": 10}, {"id": "Uber", "label": "Uber", "shape": "dot", "size": 10}, {"id": "Oracle", "label": "Oracle", "shape": "dot", "size": 10}, {"id": "Capital-One", "label": "Capital-One", "shape": "dot", "size": 10}, {"id": "IBM", "label": "IBM", "shape": "dot", "size": 10}, {"id": "Expedia", "label": "Expedia", "shape": "dot", "size": 10}, {"id": "Walmart", "label": "Walmart", "shape": "dot", "size": 10}, {"id": "Deloitte", "label": "Deloitte", "shape": "dot", "size": 10}, {"id": "Salesforce", "label": "Salesforce", "shape": "dot", "size": 10}, {"id": "Accenture", "label": "Accenture", "shape": "dot", "size": 10}, {"id": "VMware", "label": "VMware", "shape": "dot", "size": 10}, {"id": "Cognizant", "label": "Cognizant", "shape": "dot", "size": 10}, {"id": "PayPal", "label": "PayPal", "shape": "dot", "size": 10}, {"id": "Adobe", "label": "Adobe", "shape": "dot", "size": 10}, {"id": "Wayfair", "label": "Wayfair", "shape": "dot", "size": 10}, {"id": "JPMorgan", "label": "JPMorgan", "shape": "dot", "size": 10}, {"id": "Bloomberg", "label": "Bloomberg", "shape": "dot", "size": 10}, {"id": "eBay", "label": "eBay", "shape": "dot", "size": 10}, {"id": "SAP", "label": "SAP", "shape": "dot", "size": 10}, {"id": "Dell", "label": "Dell", "shape": "dot", "size": 10}, {"id": "LinkedIn", "label": "LinkedIn", "shape": "dot", "size": 10}, {"id": "EY", "label": "EY", "shape": "dot", "size": 10}, {"id": "PwC", "label": "PwC", "shape": "dot", "size": 10}, {"id": "Qualcomm", "label": "Qualcomm", "shape": "dot", "size": 10}, {"id": "Goldman-Sachs", "label": "Goldman-Sachs", "shape": "dot", "size": 10}, {"id": "Cerner", "label": "Cerner", "shape": "dot", "size": 10}, {"id": "Boeing", "label": "Boeing", "shape": "dot", "size": 10}, {"id": "T-Mobile", "label": "T-Mobile", "shape": "dot", "size": 10}, {"id": "Intuit", "label": "Intuit", "shape": "dot", "size": 10}, {"id": "Bank-of-America", "label": "Bank-of-America", "shape": "dot", "size": 10}, {"id": "Visa", "label": "Visa", "shape": "dot", "size": 10}, {"id": "Northrop-Grumman", "label": "Northrop-Grumman", "shape": "dot", "size": 10}, {"id": "NVIDIA", "label": "NVIDIA", "shape": "dot", "size": 10}, {"id": "Yahoo", "label": "Yahoo", "shape": "dot", "size": 10}, {"id": "Twitter", "label": "Twitter", "shape": "dot", "size": 10}, {"id": "Indeed", "label": "Indeed", "shape": "dot", "size": 10}, {"id": "AMD", "label": "AMD", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "Amazon", "to": "Amazon", "weight": 1538}, {"from": "Amazon", "to": "Microsoft", "weight": 603}, {"from": "Amazon", "to": "Google", "weight": 166}, {"from": "Amazon", "to": "Apple", "weight": 111}, {"from": "Amazon", "to": "Facebook", "weight": 111}, {"from": "Amazon", "to": "Cisco", "weight": 99}, {"from": "Amazon", "to": "Intel", "weight": 96}, {"from": "Amazon", "to": "Uber", "weight": 91}, {"from": "Amazon", "to": "Oracle", "weight": 81}, {"from": "Amazon", "to": "Capital-One", "weight": 77}, {"from": "Amazon", "to": "IBM", "weight": 77}, {"from": "Amazon", "to": "Expedia", "weight": 71}, {"from": "Amazon", "to": "Walmart", "weight": 71}, {"from": "Amazon", "to": "Deloitte", "weight": 70}, {"from": "Amazon", "to": "Salesforce", "weight": 70}, {"from": "Amazon", "to": "Accenture", "weight": 54}, {"from": "Amazon", "to": "VMware", "weight": 49}, {"from": "Amazon", "to": "Cognizant", "weight": 43}, {"from": "Amazon", "to": "PayPal", "weight": 40}, {"from": "Amazon", "to": "Adobe", "weight": 38}, {"from": "Amazon", "to": "Wayfair", "weight": 34}, {"from": "Amazon", "to": "JPMorgan", "weight": 33}, {"from": "Amazon", "to": "Bloomberg", "weight": 33}, {"from": "Amazon", "to": "eBay", "weight": 32}, {"from": "Amazon", "to": "SAP", "weight": 31}, {"from": "Amazon", "to": "Dell", "weight": 31}, {"from": "Amazon", "to": "LinkedIn", "weight": 30}, {"from": "Amazon", "to": "EY", "weight": 30}, {"from": "Amazon", "to": "PwC", "weight": 28}, {"from": "Microsoft", "to": "Microsoft", "weight": 1140}, {"from": "Microsoft", "to": "Intel", "weight": 208}, {"from": "Microsoft", "to": "Google", "weight": 136}, {"from": "Microsoft", "to": "Facebook", "weight": 124}, {"from": "Microsoft", "to": "Cisco", "weight": 98}, {"from": "Microsoft", "to": "Expedia", "weight": 94}, {"from": "Microsoft", "to": "IBM", "weight": 92}, {"from": "Microsoft", "to": "Oracle", "weight": 89}, {"from": "Microsoft", "to": "Apple", "weight": 84}, {"from": "Microsoft", "to": "Salesforce", "weight": 74}, {"from": "Microsoft", "to": "Adobe", "weight": 66}, {"from": "Microsoft", "to": "VMware", "weight": 62}, {"from": "Microsoft", "to": "Walmart", "weight": 60}, {"from": "Microsoft", "to": "Uber", "weight": 59}, {"from": "Microsoft", "to": "Qualcomm", "weight": 52}, {"from": "Microsoft", "to": "Goldman-Sachs", "weight": 48}, {"from": "Microsoft", "to": "Capital-One", "weight": 42}, {"from": "Microsoft", "to": "Cerner", "weight": 41}, {"from": "Microsoft", "to": "Accenture", "weight": 41}, {"from": "Microsoft", "to": "Deloitte", "weight": 39}, {"from": "Microsoft", "to": "Boeing", "weight": 39}, {"from": "Microsoft", "to": "Cognizant", "weight": 39}, {"from": "Microsoft", "to": "eBay", "weight": 37}, {"from": "Microsoft", "to": "SAP", "weight": 36}, {"from": "Microsoft", "to": "T-Mobile", "weight": 35}, {"from": "Microsoft", "to": "LinkedIn", "weight": 35}, {"from": "Microsoft", "to": "Intuit", "weight": 34}, {"from": "Microsoft", "to": "JPMorgan", "weight": 34}, {"from": "Microsoft", "to": "Bank-of-America", "weight": 33}, {"from": "Microsoft", "to": "PayPal", "weight": 31}, {"from": "Microsoft", "to": "Bloomberg", "weight": 31}, {"from": "Microsoft", "to": "Wayfair", "weight": 30}, {"from": "Microsoft", "to": "Visa", "weight": 27}, {"from": "Microsoft", "to": "Northrop-Grumman", "weight": 26}, {"from": "Microsoft", "to": "NVIDIA", "weight": 26}, {"from": "Google", "to": "Google", "weight": 402}, {"from": "Google", "to": "Facebook", "weight": 364}, {"from": "Google", "to": "Apple", "weight": 216}, {"from": "Google", "to": "Uber", "weight": 151}, {"from": "Google", "to": "Oracle", "weight": 136}, {"from": "Google", "to": "LinkedIn", "weight": 120}, {"from": "Google", "to": "Intel", "weight": 114}, {"from": "Google", "to": "Salesforce", "weight": 100}, {"from": "Google", "to": "Cisco", "weight": 95}, {"from": "Google", "to": "Bloomberg", "weight": 77}, {"from": "Google", "to": "VMware", "weight": 64}, {"from": "Google", "to": "IBM", "weight": 59}, {"from": "Google", "to": "Deloitte", "weight": 56}, {"from": "Google", "to": "Adobe", "weight": 46}, {"from": "Google", "to": "Walmart", "weight": 46}, {"from": "Google", "to": "eBay", "weight": 44}, {"from": "Google", "to": "PayPal", "weight": 42}, {"from": "Google", "to": "SAP", "weight": 36}, {"from": "Google", "to": "Qualcomm", "weight": 33}, {"from": "Google", "to": "Yahoo", "weight": 31}, {"from": "Google", "to": "Dell", "weight": 30}, {"from": "Google", "to": "Intuit", "weight": 30}, {"from": "Google", "to": "Expedia", "weight": 30}, {"from": "Google", "to": "Goldman-Sachs", "weight": 28}, {"from": "Google", "to": "Twitter", "weight": 26}, {"from": "Google", "to": "Indeed", "weight": 25}, {"from": "Intel", "to": "Intel", "weight": 827}, {"from": "Intel", "to": "Qualcomm", "weight": 61}, {"from": "Intel", "to": "Apple", "weight": 56}, {"from": "Intel", "to": "AMD", "weight": 33}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
